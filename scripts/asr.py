@@ -4,6 +4,7 @@
 import sys
 
 from jetson_voice import ASR, AudioInput, ConfigArgParser, list_audio_devices
+from NatLang_to_Calculation import NatLangFuncs
 
     
     
@@ -25,6 +26,8 @@ if args.list_devices:
 # load the model
 asr = ASR(args.model)
 
+lang2num = NatLangFuncs()
+
 # create the audio input stream
 stream = AudioInput(wav=args.wav, mic=args.mic, 
                      sample_rate=asr.sample_rate, 
@@ -41,7 +44,12 @@ for samples in stream:
             print(transcript['text'])
             
             if transcript['end']:
-                print('')
+                print('Testing function call:')
+                print(lang2num.sentenceToAnswer(transcript['text']))
+                print(transcript['text']) #returns the string with a period
+
+                #print(transcript['end']) #returns true
+                #print(transcript) #returns a lot of data
                 
 print('\naudio stream closed.')
     
