@@ -107,9 +107,8 @@ class NatLangFuncs:
 		"""
 		calculation = self.__get_calc_string__(sentence)
 		number_ans = self.__calculate__(calculation)
+		number_ans = abs(number_ans) #TODO doing absolute value for now
 		return [int(c) for c in str(number_ans)]
-
-	#def tests():
 
 def tests():
 	natlangfuncs = NatLangFuncs()
@@ -120,4 +119,4 @@ def tests():
 	print(natlangfuncs.sentenceToAnswer(test2))
 	print(natlangfuncs.sentenceToAnswer(test3))
 
-tests()
+#tests()
